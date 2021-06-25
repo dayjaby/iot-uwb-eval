@@ -1,10 +1,17 @@
 import pynmea2
-from pymavlink.dialects.v10 import common
+from pymavlink.dialects.v20 import common
 from pymavlink import mavutil
 from datetime import datetime, timedelta
 import time
 import binascii
 import serial
+import math
+import json
+import paho.mqtt.client as mqtt
+
+client = mqtt.Client()
+
+client.connect("127.0.0.1", 1883, 60)
 
 mav_serial = mavutil.mavserial(device="/dev/uwb_node_0001", source_system=1, source_component=common.MAV_COMP_ID_AUTOPILOT1)
 # mav.disable_signing()
@@ -30,12 +37,29 @@ def mav_to_dict(mavmsg):
             payload16=binascii.hexlify(mavmsg.get_payload())
         )
 
+def quaternion_to_euler(q):
+    w, x, y, z = q
+    sinr_cosp = 2 * (w * x + y * z)
+    cosr_cosp = 1 - 2 * (x * x + y * y)
+    roll = math.degrees(math.atan2(sinr_cosp, cosr_cosp))
+    sinp = 2 * (w * y - z  * x)
+    if abs(sinp) >= 1:
+        pitch = math.copysign(90, sinp)
+    else:
+        pitch = math.degrees(math.asin(sinp))
+
+    siny_cosp = 2 * (w * z + x * y)
+    cosy_cosp = 1 - 2 * (y * y + z * z)
+    yaw = math.degrees(math.atan2(siny_cosp, cosy_cosp))
+    return roll, pitch, yaw
+
 ser = serial.Serial("/dev/gps_node_A10JWLOY", 9600)
 while True:
-    line = ser.readline().decode("utf8").strip()
-    if line.startswith("$GPGGA"):
-        gp = pynmea2.parse(line)
-        try:
+    client.loop() 
+    try:
+        line = ser.readline().decode("utf8").strip()
+        if line.startswith("$GPGGA"):
+            gp = pynmea2.parse(line)
             msg = common.MAVLink_gps_raw_int_message(
                 time_usec=int(timedelta(hours=gp.timestamp.hour, minutes=gp.timestamp.minute, seconds=gp.timestamp.second).total_seconds()*1e6),
                 #time_usec=int(datetime.utcnow().timestamp()*1e6),
@@ -52,14 +76,17 @@ while True:
             #msg.pack(mav_serial.mav) # not necessary when we send the message, however helpful when we want to explore the serialized data without sending it
             mav_serial.mav.send(msg)
 
-            x = mav_serial.port.readline()
-            print(x)
-            """
-            r = mav_serial.recv_msg()
-            if r is not None:
-                print(mav_to_dict(r))
-                pass
-            """
-        except:
-            pass # silently ignore any NMEA parsing errors
-
+        r = mav_serial.recv_msg()
+        if r is not None:
+            if r.get_msgId() == common.MAVLINK_MSG_ID_DISTANCE_SENSOR:
+                print(r)
+                roll, pitch, yaw = quaternion_to_euler(r.quaternion)
+                data = {
+                    "roll": roll,
+                    "pitch": pitch,
+                    "yaw": yaw,
+                    "distance": r.current_distance # TODO: / 100.0 # cm to m
+                }
+                client.publish("drone/{}/peer/{}/distance".format(r.get_srcSystem(), r.id), json.dumps(data))
+    except:
+        pass # silently ignore any NMEA parsing errors

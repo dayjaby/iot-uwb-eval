@@ -1,0 +1,50 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "community",
+  "signedByOrg": "flant",
+  "signedByOrgName": "flant",
+  "plugin": "flant-statusmap-panel",
+  "version": "0.4.1",
+  "time": 1613640171934,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "partials/options_editor.html": "9a50cdafedd28dc45ce3a8fb11974f849871f7739bd684a5960ae73f2fc1e330",
+    "partials/tooltip_editor.html": "8a0ba58f3afe5c6c84781bf5859fca40188fed7ec022b9d5e822adc461c6e51b",
+    "partials/about_editor.html": "e00e3ff926173ff92f498f8b353f58d6333e97c0a3750318b5ba371c30bc24ea",
+    "LICENSE": "c84b3116fe21267d9205871d205cb3b560682074c9c0e8df5d800e1a06cdc830",
+    "CHANGELOG.md": "6afab847b6c8a5345a6c9e8e5c0b21e6fb8e32b1bfae17e12f56aadc917d7806",
+    "README.md": "746669a0a394ca17902d55c5c3202a7736e76c2647f4687f2d9723b55216bdde",
+    "dark.js": "023ccec67767d6e23a2b653b1083455aa6092595ded5e389bdbc45f6a56135ef",
+    "module.js.map": "21e94983984ad01fdfd51b7b04e20404fab1c4e4cc5aceb53538a156adf2c13b",
+    "module.js": "92fe7100ffa3074ea853aa5b45c42000a79f88999ebbe09f165f68d1072be0cc",
+    "module.js.LICENSE.txt": "0d8f66cd4afb566cb5b7e1540c68f43b939d3eba12ace290f18abc4f4cb53ed0",
+    "styles/light.css": "75110754f885885c34c31b9d1c01417e5d68f565a49813abec8ba3002ee92ba4",
+    "styles/dark.css": "ca3e342cd150ddc672ad9f85ae0b14d9e74896ac937b1446ccf3adef5974af68",
+    "light.js.map": "11b8a5a03ed3700390e57719463160a0b0202fdf98d1f10d07205943446145e3",
+    "module.html": "3e1678b491eca51b0af6ef7792ea8377d0ad0c3b102987534782fbdd990d0242",
+    "img/queries-example.png": "6e34ce07e8beaf706d2b73eda90d2d31d8a380ee73ec0d6715e87c2b576d2104",
+    "img/flant-statusmap-panel.png": "ccc16fb1e8fefd26e5cdb4e2fa7ef1244e1e39a34e4cafaa5757ad75137c34ac",
+    "img/statusmap_icon.svg": "4a8aa388abccd6347c217d713a02a2a05b0487ff32b92925d03f50611ad184c2",
+    "img/flant-statusmap-panel-dark.png": "92cb924fed0b53aa736b164cabbca64e7323577ea7226da79afccbed6e641bf2",
+    "img/flant_corner.svg": "c4999a94e349946036fa2a995682e1c6891783fe30beb24fd9c60b3dc22c9f55",
+    "img/logo.svg": "41f46e08d75d0cc0bd575fc260b5baff9286db45a43fce2213cc9dcc629e0d02",
+    "img/color-mapping.png": "90116639c24f0056f67333304f188b83de2646d32594da364840f5e2f3cc247a",
+    "light.js": "324c8ab04b37fef4595c9b7cbd8e801f2537c93d08f12a8f7b09433dd136f229",
+    "dark.js.map": "0d4e76e7449257562010cd66cf974624227526c9f1014e679f2fc24de818e1a4",
+    "plugin.json": "522242cf57a3fa3d4c725043d9b1e0ea62e1d6bc8c9d446e6854e939ff390048"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqAEARMKAAYFAmAuMewACgkQfk0ManCIZufojgII+HavDg3k5uIIw0OCckms
+eTnNSxr95wwNKv/xO0r5gMWiaX7t9W5m1+1GNBgIvCIDvkYPR3KoPtFopygt
+/HQ4LNMCCMAtCXKzpXrec0OhLg1SDrH1Rm8iLUpY20vKv+xZn+j6gEaIg0bD
+LRt5DwH+V9oV8GqQTTdYwOUdKheKtaUw1ojO
+=nTjY
+-----END PGP SIGNATURE-----
