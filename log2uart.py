@@ -46,15 +46,10 @@ for line in open("log.txt", "r"):
             cog=0xFFFF,
             satellites_visible=int(gp.num_sats)
         )
+        print(msg)
         mav_serial.mav.send(msg)
         time.sleep(0.5)
 
-        x = mav_serial.port.readline()
-        print(x)
-        """
-        r = mav_serial.recv_msg()
-        if r is not None:
-            print(mav_to_dict(r))
-            pass
-        """
-
+    r = mav_serial.recv_msg()
+    if r is not None:
+        print(r)
